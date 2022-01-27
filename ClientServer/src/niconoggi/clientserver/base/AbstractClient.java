@@ -2,6 +2,12 @@ package niconoggi.clientserver.base;
 
 import java.net.Socket;
 
+/**
+ * An abstract implementation of the {@link CommunicationComponent} interface.
+ * It provides a {@link Socket} and information about host ip and port
+ * @author niconoggi
+ *
+ */
 public abstract class AbstractClient implements CommunicationComponent{
 
 	/** this represents the client */

@@ -3,6 +3,8 @@ package niconoggi.clientserver.base;
 import java.io.IOException;
 import java.net.ServerSocket;
 
+import niconoggi.clientserver.server.ServerValues;
+
 /**
  * an abstract class providing the basics a server needs,
  * such as a {@link ServerSocket} and a start and stop method
@@ -13,6 +15,10 @@ public abstract class AbstractServer implements CommunicationComponent{
 	
 	protected ServerSocket server;
 	protected int port;
+	
+	protected int connectTimeout = ServerValues.DEFAULT_CONNECTION_TIMEOUT;
+	protected int maxRetries = ServerValues.DEFAULT_CONNECTION_RETRIES;
+	protected int connectionRetries;
 	
 	public AbstractServer() {}
 	
@@ -61,6 +67,26 @@ public abstract class AbstractServer implements CommunicationComponent{
 	
 	public void setPort(final int port) {
 		this.port = port;
+	}
+	
+	public int getMaxRetries() {
+		return maxRetries;
+	}
+	
+	public void setMaxRetries(final int maxRetries) {
+		this.maxRetries = maxRetries;
+	}
+	
+	public int getConnectionRetries() {
+		return connectionRetries;
+	}
+	
+	public int getConnectTimeout() {
+		return connectTimeout;
+	}
+	
+	public void setConnectTimeout(final int timeout) {
+		connectTimeout = timeout;
 	}
 	
 	@Override
