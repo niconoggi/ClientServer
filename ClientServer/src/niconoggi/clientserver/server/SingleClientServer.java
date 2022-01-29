@@ -4,24 +4,25 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+import niconoggi.clientserver.util.DataConverterUtil;
+import niconoggi.clientserver.util.InstanceCopier;
+
 /**
  * A very basic instanciateable extension of {@link AbstractSingleClientServer}.
- * It provides basic writing and reading of {@link String}s.
- * <p>
- * NOTE: If primitive types are wanted, either convert them to a String or extend
- * {@link AbstractSingleClientServer} and change the datatype of the data to write and read
- * @author epic-
+ * It provides basic writing and reading of bytes. This is to create compatibility
+ * with {@link InstanceCopier} and {@link DataConverterUtil}
+ * @author niconoggi
  *
  */
 public class SingleClientServer extends AbstractSingleClientServer{
 
-	protected String dataToWrite;
-	protected String readData;
+	protected byte[] dataToWrite;
+	protected byte[] readData;
 	
 	@Override
 	public void write() throws IOException {
 		final DataOutputStream out = new DataOutputStream(client.getOutputStream());
-		out.writeUTF(dataToWrite);
+		out.write(dataToWrite);
 		out.close();
 		out.flush();
 	}
@@ -29,7 +30,7 @@ public class SingleClientServer extends AbstractSingleClientServer{
 	@Override
 	public void read() throws IOException {
 		final DataInputStream in = new DataInputStream(client.getInputStream());
-		readData = in.readUTF();
+		readData = in.readAllBytes();
 		in.close();
 	}
 	
@@ -40,7 +41,7 @@ public class SingleClientServer extends AbstractSingleClientServer{
 	 * Otherwise potentially unintended or no data will be written
 	 * @param dataToWrite
 	 */
-	public void setDataToWrite(final String dataToWrite) {
+	public void setDataToWrite(final byte[] dataToWrite) {
 		this.dataToWrite = dataToWrite;
 	}
 	
@@ -49,8 +50,22 @@ public class SingleClientServer extends AbstractSingleClientServer{
 	 * Otherwise this method might return null.
 	 * @return the read data
 	 */
-	public String getReadData() {
+	public byte[] getReadData() {
 		return readData; 
+	}
+	
+	@Override
+	public boolean equals(final Object obj) {
+		if(!super.equals(obj)) {
+			return false;
+		}
+		
+		if(!(obj instanceof SingleClientServer)) { 
+			return false;
+		}
+		
+		final SingleClientServer other = (SingleClientServer) obj;
+		return dataToWrite.equals(other.dataToWrite) && readData.equals(other.readData);
 	}
 
 }
