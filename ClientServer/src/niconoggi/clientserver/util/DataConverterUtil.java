@@ -47,4 +47,5 @@ public class DataConverterUtil<D extends Serializable> {
 		final ObjectInputStream objectIn = new ObjectInputStream(byteArrayIn);
 		return (D) objectIn.readObject();
 	}
+	
 }

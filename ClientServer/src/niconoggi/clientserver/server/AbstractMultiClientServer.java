@@ -263,6 +263,12 @@ public abstract class AbstractMultiClientServer extends AbstractServer {
 		return builder.toString();
 	}
 	
+	/**
+	 * iterates over the client array to see if the arrays
+	 * of this instance and the given instance equal
+	 * @param other the other array of {@link SerializableSocket} 
+	 * @return true, if both arrays equal. false otherwise
+	 */
 	private boolean clientsEqual(final SerializableSocket[] other) {
 		for(int inArray = 0; inArray < clients.length; inArray++) {
 			if(!clients[inArray].equals(other[inArray])) {
@@ -273,6 +279,12 @@ public abstract class AbstractMultiClientServer extends AbstractServer {
 		return true;
 	}
 	
+	/**
+	 * iterates over the addresses to see if the arrays
+	 * of this instance and the given instance equal
+	 * @param other the other array of addresses
+	 * @return true, if both arrays equal. false otherwise
+	 */
 	private boolean addressesEqual(final String[] other) {
 		for(int inArray = 0; inArray < rememberedAddresses.length; inArray++) {
 			if(!rememberedAddresses[inArray].equals(other[inArray])) {

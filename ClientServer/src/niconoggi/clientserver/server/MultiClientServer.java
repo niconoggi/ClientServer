@@ -3,6 +3,7 @@ package niconoggi.clientserver.server;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.util.List;
 
 import niconoggi.clientserver.base.SerializableSocket;
@@ -24,6 +25,17 @@ public class MultiClientServer extends AbstractMultiClientServer{
 
 	private byte[] dataToWrite;
 	private List<byte[]> readData;
+	
+	public MultiClientServer() {
+	}
+
+	public MultiClientServer(final int port) {
+		super(port);
+	}
+
+	public MultiClientServer(final int port, final int clientAmount) {
+		super(port, clientAmount);
+	}
 	
 	@Override
 	public void write() throws IOException {

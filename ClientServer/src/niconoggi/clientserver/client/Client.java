@@ -19,6 +19,20 @@ public class Client extends AbstractClient{
 	protected byte[] dataToWrite;
 	protected byte[] readData;
 	
+	public Client() {}
+	
+	public Client(final String host) {
+		super(host);
+	}
+	
+	public Client(final int port) {
+		super(port);
+	}
+	
+	public Client(final String host, final int port) {
+		super(host,port);
+	} 
+	
 	@Override
 	public void connect() throws IOException {
 		socket = new Socket(host, port);

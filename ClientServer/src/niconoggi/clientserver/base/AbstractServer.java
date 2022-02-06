@@ -91,6 +91,9 @@ public abstract class AbstractServer implements CommunicationComponent{
 	
 	@Override
 	public boolean equals(final Object obj) {
+		if(obj == null){
+			return false;
+		}
 		if(!(obj instanceof AbstractServer)) {
 			return false;
 		}

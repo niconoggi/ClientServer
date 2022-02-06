@@ -48,6 +48,9 @@ public abstract class AbstractClient implements CommunicationComponent{
 	
 	@Override
 	public boolean equals(final Object obj) {
+		if(obj == null) {
+			return false; 
+		}
 		if(!(obj instanceof AbstractClient)) {
 			return false;
 		}

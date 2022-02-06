@@ -19,6 +19,14 @@ public abstract class AbstractSingleClientServer extends AbstractServer {
 	protected SerializableSocket client;
 
 	protected String rememberedClientAddress;
+	
+	public AbstractSingleClientServer() {
+		super();
+	}
+	
+	public AbstractSingleClientServer(final int port) {
+		super(port);
+	}
 
 	@Override
 	public void connect() throws IOException {

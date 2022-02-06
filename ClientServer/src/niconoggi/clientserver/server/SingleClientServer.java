@@ -19,6 +19,14 @@ public class SingleClientServer extends AbstractSingleClientServer{
 	protected byte[] dataToWrite;
 	protected byte[] readData;
 	
+	public SingleClientServer() {
+		super();
+	}
+	
+	public SingleClientServer(final int port) {
+		super(port);
+	}
+	
 	@Override
 	public void write() throws IOException {
 		final DataOutputStream out = new DataOutputStream(client.getOutputStream());
@@ -68,4 +76,16 @@ public class SingleClientServer extends AbstractSingleClientServer{
 		return dataToWrite.equals(other.dataToWrite) && readData.equals(other.readData);
 	}
 
+	@Override
+	public int hashCode() {
+		return super.hashCode() + dataToWrite.hashCode() + readData.hashCode();
+	}
+	
+	@Override
+	public String toString() {
+		final StringBuilder builder = new StringBuilder(super.toString());
+		builder.append("data to write = ").append(dataToWrite.toString());
+		builder.append(", read data = ").append(readData.toString());
+		return builder.toString();
+	}
 }
